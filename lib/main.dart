@@ -8,52 +8,63 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   // This widget is the root of your application.
+  // Builds the UI for app
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Counter App',
+      title: 'Counter App', // Set app name
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: const CounterScreen(),
+      home: const CounterScreen(), // Sets CounterScreen as first screen when app starts
     );
   }
 }
 
+// Stateful widget (can change over time)
 class CounterScreen extends StatefulWidget {
   const CounterScreen({super.key});
 
   @override
-  State<CounterScreen> createState() => _CounterScreenState();
+  State<CounterScreen> createState() => _CounterScreenState(); // Manages state for CounterScreen
 }
 
 class _CounterScreenState extends State<CounterScreen> {
   int _counter = 0; // Variable to keep track of counter
 
+  // Method
+  // Increases _counter by 1 every time button is pushed
   void _incrementCounter(){
+    // setState tells Flutter to update the UI
     setState((){
       _counter++; // Increment counter when button is pressed
     });
   }
 
+  // Rebuilds the UI whenever setState is called
   @override
   Widget build(BuildContext context){
+
+    // Scaffold provides the basic structure 
     return Scaffold(
+
+      // Top bar with a title
       appBar: AppBar(
         title: const Text('Counter App'),
         backgroundColor: Colors.blueAccent,
-
       ),
-      body: Center(
-        child: Column(
+
+
+      body: Center( // Everything in center of screen
+        child: Column( // Displays widgets in vertical stack
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
+            const Text( // Static text that does not change
               'You have pushed the button this many times:',
               style: TextStyle(fontSize: 18),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 10), // Adds spacing
             Text(
               '$_counter',
               style: const TextStyle(fontSize:40, fontWeight: FontWeight.bold),
@@ -61,67 +72,13 @@ class _CounterScreenState extends State<CounterScreen> {
           ],
         ),
       ),
+
+      // Button that triggers _incrementCounter()
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter, // Button event
         tooltip: 'Increment',
-        child: const Icon(Icons.add), 
+        child: const Icon(Icons.add), // Shows + icon
       ),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    
-    return Scaffold(
-      appBar: AppBar(
-        
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        
-        title: Text(widget.title),
-      ),
-      body: Center(
-        
-        child: Column(
-          
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
